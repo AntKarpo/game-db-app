@@ -1,0 +1,10 @@
+.header{
+  border: solid 1px rgb(39, 152, 186);
+  background-color: rgb(74, 103, 132);
+  color: antiquewhite;
+  max-height: fit-content;
+}
+
+.title{
+  font-size: 20px;
+}
