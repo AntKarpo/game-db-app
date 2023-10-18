@@ -3,8 +3,32 @@
   background-color: rgb(74, 103, 132);
   color: antiquewhite;
   max-height: fit-content;
+  display:flex;
+  flex-direction:row;
+  align-items:center
 }
 
 .title{
   font-size: 20px;
+  margin: 10px;
+  padding: 5px;
+}
+
+.searchBarButton{
+  margin: 10px;
+  background-color: rgb(74, 103, 132);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.searchBarButton:hover {
+  background-color: lightgreen;
+}
+
+#loginIcon {
+  margin-left: auto;
+}
+
+.pressed {
+  transform: translateY(2px);
 }
