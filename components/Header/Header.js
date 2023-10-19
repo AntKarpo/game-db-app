@@ -4,6 +4,7 @@ import { useState } from "react";
 import {  useRouter } from "next/router";
 
 
+
 export default function Header() {
   const [searchButtonPressed, setSearchButtonPressed] = useState(false);
   const [gameButtonPressed, setGameButtonPressed] = useState(false);
@@ -39,6 +40,7 @@ export default function Header() {
   const handleLoginButtonClick = () => {
     setLoginButtonPressed(true);
   };
+
 
   return (
     <nav className={styles.header}>
