@@ -6,6 +6,9 @@ const GameDetails = ({ gameList }) => {
   const router = useRouter();
   const { id } = router.query; 
 
+  const handleReviewButton=()=> {
+    router.push("/add-review")
+  }
   
   const selectedGame = gameList.find((game) => game.id === parseInt(id));
 
@@ -21,7 +24,8 @@ const GameDetails = ({ gameList }) => {
         alt={`Image for ${selectedGame.name}`}
         width={300}
         height={300}
-      />
+      /><br/>
+      <button className={styles.reviewButton} onClick={handleReviewButton}>+ Add Review</button>
       <p>Metascore rating: {selectedGame.metascore}</p>
       <div>
         {selectedGame.short_screenshots?.map((screenshot, index) => (

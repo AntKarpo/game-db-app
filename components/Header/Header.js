@@ -35,7 +35,7 @@ import {  useRouter } from "next/router";
   }
   const handlecomingsoonButtonClick=()=>{
     setComingsoonButtonPressed(true);
-    router.push("/coming-soon")
+    router.push("/add-review")
   }
 
   const handleLoginButtonClick = () => {

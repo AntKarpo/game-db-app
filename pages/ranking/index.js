@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const RankingPage = ({ gameList, wishlist, toggleWishlist }) => {
 
@@ -14,12 +15,14 @@ const RankingPage = ({ gameList, wishlist, toggleWishlist }) => {
         {topTenGames.map((game, index) => (
           <div key={game.id}>
               <h3>{index + 1}. {game.name}</h3>
+              <Link href={`/games/${game.id}?name=${game.name}`} key={game.id}>
              <img
                 src={game.background_image}
                 width={200}
                 height={200}
                 alt={`Image for ${game.name}`}
               />
+              </Link>
                <button onClick={() => toggleWishlist(game)}>
               {wishlist.includes(game.id) ? (
                 <img
