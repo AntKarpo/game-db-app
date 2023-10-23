@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const reviewSchema = new Schema({
+const ratingSchema = new Schema({
   name: { type: String, required: true },
   review: { type: String, required: true },
 });
 
-const Reviews = mongoose.models.Review || mongoose.model("Game", reviewSchema);
+const Rating = mongoose.models.Rating || mongoose.model("Game", ratingSchema);
 
-export default Reviews;
+export default Rating;

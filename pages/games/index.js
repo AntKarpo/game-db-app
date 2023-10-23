@@ -7,24 +7,24 @@ import Review from "@/components/Review/Review";
 const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
   const router = useRouter();
   const searchQuery = router.query.search || ""; 
-  const [rating, setRating] = useState(Array(10).fill(false));
-
+  const [rating, setRating] = useState(Array(10).fill());
  
   const filteredGameList = gameList.filter(
     (game) =>
       game.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleStarClick = (index) => {
-    const newRating = [...rating];
-
+  const toggleStarClick = (index) => {
+   
+    const newRating = Array(rating.length).fill(false);
+  
     for (let i = 0; i <= index; i++) {
       newRating[i] = true;
     }
-
     setRating(newRating);
   };
 
+  // 
 
 
 console.log(gameList);
@@ -72,7 +72,7 @@ console.log(gameList);
           <Review
             key={index}
             filled={filled}
-            onClick={() => handleStarClick(index)}
+            onClick={() => toggleStarClick(index)}
           />
         ))}
           </div>
