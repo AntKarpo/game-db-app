@@ -15,10 +15,11 @@ const screenshotss = JSON.parse(screenshots);
       <h1>{name}</h1>
       <img src={image} alt={`Image for ${name}`} width={300} height={300} />
       <p>Metascore rating: {metascore}</p><br/>
-      <div className={styles.screenshotsContainer}>
+      <div>
         {console.log(screenshots, "inline screenshot")}
         {screenshotss?.map((screenshot, index) => (
             <img
+            className={styles.screenshotsContainer}
               key={index}
               src={screenshot}
               alt={`Screenshot for ${name}`}
