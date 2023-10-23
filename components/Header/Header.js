@@ -3,19 +3,20 @@ import Image from "next/image";
 import { useState } from "react";
 import {  useRouter } from "next/router";
 
-
-
-export default function Header() {
-  const [searchButtonPressed, setSearchButtonPressed] = useState(false);
-  const [gameButtonPressed, setGameButtonPressed] = useState(false);
-  const [rankButtonPressed, setRankButtonPressed] = useState(false);
-  const [loginButtonPressed, setLoginButtonPressed] = useState(false);
-  const [wishlistButtonPressed, setWishlistButtonPressed] =useState(false);
-  const [comingsoonButtonPressed, setComingsoonButtonPressed] =useState(false);
-  const router = useRouter();
-
-  const handleSearchButtonClick = () => {
-    setSearchButtonPressed(true);
+  export default function Header() {
+    const [searchButtonPressed, setSearchButtonPressed] = useState(false);
+    const [gameButtonPressed, setGameButtonPressed] = useState(false);
+    const [rankButtonPressed, setRankButtonPressed] = useState(false);
+    const [loginButtonPressed, setLoginButtonPressed] = useState(false);
+    const [wishlistButtonPressed, setWishlistButtonPressed] =useState(false);
+    const [comingsoonButtonPressed, setComingsoonButtonPressed] =useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    
+    const router = useRouter();
+    
+    const handleSearchButtonClick = () => {
+      setSearchButtonPressed(true);
+      router.push(`/games?search=${searchQuery}`);
   };
 
   const handleGameButtonClick = () => {
@@ -51,6 +52,8 @@ export default function Header() {
           name="searchBar"
           className={styles.SearchInput}
           placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button
           type="submit"

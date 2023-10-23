@@ -1,42 +1,33 @@
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Games.module.css";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Review from "@/components/Review/Review";
 
-const fetchGames = async (page) => {
-  try {
-    const response = await fetch(
-      `https://api.rawg.io/api/games?key=27257cb0d3da4a78b072bd0bc225adb6&page=${page}`
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok.");
+const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
+  const router = useRouter();
+  const searchQuery = router.query.search || ""; 
+  const [rating, setRating] = useState(Array(10).fill(false));
+
+ 
+  const filteredGameList = gameList.filter(
+    (game) =>
+      game.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleStarClick = (index) => {
+    const newRating = [...rating];
+
+    for (let i = 0; i <= index; i++) {
+      newRating[i] = true;
     }
-    const data = await response.json();
-  console.log("data",data);
-    return data.results;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
 
-const GamePage = () => {
-  const [gameList, setGameList] = useState([]);
-  const [page, setPage] = useState(1); 
-
-
-
-  useEffect(() => {
-    async function fetchData(){
-   const newGames = await fetchGames(page);
-  console.log("newGames",newGames);
-          setGameList([...gameList, ...newGames])}
-          fetchData()
-}, [page]);
-
-  const loadMoreGames = () => {
-    setPage(page + 1);
+    setRating(newRating);
   };
 
-if(!gameList) return
+
+
+console.log(gameList);
   return (
     <main>
       <h2>All the Games in One Place</h2>
@@ -44,24 +35,51 @@ if(!gameList) return
         {gameList.map((game) => (
           <div key={game.id} className={styles.gameCard}>
             <h3>{game.name}</h3>
-            <Link
-            href={`/games/${game.id}?name=${game.name}&image=${game.background_image}&metascore=${game.metacritic}&screenshots=${JSON.stringify(
-              game.short_screenshots.map((screenshot) => screenshot.image))}`}
-              key={game.id}
-              >
-      
-            <img
-      src={game.background_image}
-      width={200}
-      height={200}
-      alt={`Image for ${game.name}`}
-    />
-</Link>
+            <button onClick={() => toggleWishlist(game)}>
+              {wishlist.includes(game.id) ? (
+                <img
+                  src="/assets/favorite-full.png"
+                  width={20}
+                  height={20}
+                  alt={`Remove from Wishlist`}
+                />
+              ) : (
+                <img
+                  src="/assets/favorite-empty.png"
+                  width={20}
+                  height={20}
+                  alt={`Add to Wishlist`}
+                />
+              )}
+            </button>
+            <Link href={`/games/${game.id}?name=${game.name}`} key={game.id}>
+              <img
+                src={game.background_image}
+                width={200}
+                height={200}
+                alt={`Image for ${game.name}`}
+              />
+            </Link><br/>
+            <Link href={`https://store.steampowered.com/?l=german`}>
+              <img
+              src="/assets/steam-logo.png"
+               width={40}  
+               height={40}
+                alt={`steam-buy`}/>
+                </Link>
+    
+        {rating.map((filled, index) => (
+          <Review
+            key={index}
+            filled={filled}
+            onClick={() => handleStarClick(index)}
+          />
+        ))}
           </div>
         ))}
       </div>
-<div className={styles.centeredButton}>
-      <button onClick={loadMoreGames}>Load More Games</button>
+      <div className={styles.centeredButton}>
+        <button onClick={loadMoreGames}>Load More Games</button>
       </div>
     </main>
   );

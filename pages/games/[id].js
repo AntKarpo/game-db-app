@@ -1,32 +1,39 @@
 import React from "react";
 import { useRouter } from "next/router";
-import styles from "./id.module.css"
+import styles from "./id.module.css";
 
-const GameDetails = () => {
+const GameDetails = ({ gameList }) => {
   const router = useRouter();
-  const { id, name, image, metascore, screenshots } = router.query;
+  const { id } = router.query; 
+
   
-  console.log(screenshots, "screenshots");
-  console.log(name,"name");
-const screenshotss = JSON.parse(screenshots);
+  const selectedGame = gameList.find((game) => game.id === parseInt(id));
+
+  if (!selectedGame) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.detailsCard}>
-      <h1>{name}</h1>
-      <img src={image} alt={`Image for ${name}`} width={300} height={300} />
-      <p>Metascore rating: {metascore}</p><br/>
+      <h1>{selectedGame.name}</h1>
+      <img
+        src={selectedGame.background_image}
+        alt={`Image for ${selectedGame.name}`}
+        width={300}
+        height={300}
+      />
+      <p>Metascore rating: {selectedGame.metascore}</p>
       <div>
-        {console.log(screenshots, "inline screenshot")}
-        {screenshotss?.map((screenshot, index) => (
-            <img
+        {selectedGame.short_screenshots?.map((screenshot, index) => (
+          <img
             className={styles.screenshotsContainer}
-              key={index}
-              src={screenshot}
-              alt={`Screenshot for ${name}`}
-              width={150}
-              height={120}
-              />
-              ))}
+            key={index}
+            src={screenshot.image}
+            alt={`Screenshot for ${selectedGame.name}`}
+            width={150}
+            height={120}
+          />
+        ))}
       </div>
     </div>
   );
