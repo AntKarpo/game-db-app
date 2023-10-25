@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }) {
       setWishlist([...wishlist, game.id]);
     }
   };
+
   
   const fetchGames = async (page) => {
     try {

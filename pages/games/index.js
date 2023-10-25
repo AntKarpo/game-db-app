@@ -1,30 +1,15 @@
 import Link from "next/link";
 import styles from "./Games.module.css";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import Review from "@/components/Review/Review";
 
 const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
   const router = useRouter();
   const searchQuery = router.query.search || ""; 
-  const [rating, setRating] = useState(Array(10).fill());
  
   const filteredGameList = gameList.filter(
     (game) =>
       game.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const toggleStarClick = (index) => {
-   
-    const newRating = Array(rating.length).fill(false);
-  
-    for (let i = 0; i <= index; i++) {
-      newRating[i] = true;
-    }
-    setRating(newRating);
-  };
-
-  // 
 
 
 console.log(gameList);
@@ -67,14 +52,6 @@ console.log(gameList);
                height={40}
                 alt={`steam-buy`}/>
                 </Link>
-    
-        {rating.map((filled, index) => (
-          <Review
-            key={index}
-            filled={filled}
-            onClick={() => toggleStarClick(index)}
-          />
-        ))}
           </div>
         ))}
       </div>
