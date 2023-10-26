@@ -33,10 +33,7 @@ import {  useRouter } from "next/router";
     setWishlistButtonPressed(true);
     router.push("/wishlist")
   }
-  const handlecomingsoonButtonClick=()=>{
-    setComingsoonButtonPressed(true);
-    router.push("/add-review")
-  }
+ 
 
   const handleLoginButtonClick = () => {
     setLoginButtonPressed(true);
@@ -102,18 +99,6 @@ import {  useRouter } from "next/router";
           width={60}
           height={60}
           alt="wishlist Icon"
-        />
-      </button>
-      <button
-        className={`${styles.searchBarButton} ${comingsoonButtonPressed ? styles.pressed : ""}`}
-        id={styles.comingsoonIcon}
-        onClick={handlecomingsoonButtonClick}
-      >
-        <Image
-          src="/assets/coming-soon.png"
-          width={60}
-          height={60}
-          alt="coming-soon Icon"
         />
       </button>
       <button

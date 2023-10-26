@@ -5,13 +5,7 @@ import { useRouter } from "next/router";
 const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
   const router = useRouter();
   const searchQuery = router.query.search || ""; 
- 
-  const filteredGameList = gameList.filter(
-    (game) =>
-      game.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-
+;
 console.log(gameList);
   return (
     <main>
