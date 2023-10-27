@@ -16,7 +16,7 @@ const review = {
 }
 const createdReview = await Review.create(review);
 
-      response.status(201).json({ status: ` and their rating added` });
+      response.status(201).json({ status: `${createdReview} and their rating added` });
     } catch (error) {
       response.status(500).json({ error: "An error occurred" });
     }

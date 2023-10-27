@@ -9,7 +9,6 @@ import {  useRouter } from "next/router";
     const [rankButtonPressed, setRankButtonPressed] = useState(false);
     const [loginButtonPressed, setLoginButtonPressed] = useState(false);
     const [wishlistButtonPressed, setWishlistButtonPressed] =useState(false);
-    const [comingsoonButtonPressed, setComingsoonButtonPressed] =useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     
     const router = useRouter();

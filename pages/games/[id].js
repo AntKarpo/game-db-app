@@ -36,7 +36,6 @@ const GameDetails = ({ gameList}) => {
     console.error("Error creating review:", response.status);
   }
 
-  console.log("newReview============",newReview);
   if (newReview.name.trim() === "" || newReview.text.trim() === "") {
     alert("Name and Review are required.");
     return;

@@ -1,11 +1,10 @@
 import Link from "next/link";
 import styles from "./Games.module.css";
-import { useRouter } from "next/router";
+
 
 const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
-  const router = useRouter();
-  const searchQuery = router.query.search || ""; 
-;
+ 
+
 console.log(gameList);
   return (
     <main>
