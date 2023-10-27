@@ -9,7 +9,7 @@ const Review = ({ filled, onStarClick}) => {
         alt="Star"
         width={25}
         height={25}
-        onClick={onStarClick}
+        onClick={()=>onStarClick()}
       />
     </div>
   );

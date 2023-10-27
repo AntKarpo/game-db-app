@@ -4,23 +4,24 @@ import Review from "@/db/models/Review";
 export default async function handler(request, response) {
   await dbConnect();
 
+  try {
   if (request.method === "POST") {
-
-    try {
 
 const review = {
   game: request.body.game,
-  user: request.body.name,
-  rating: request.body.stars,
-  review: request.body.text,
+  user: request.body.user,
+  rating: request.body.rating,
+  review: request.body.review,
 }
 const createdReview = await Review.create(review);
 
-      response.status(201).json({ status: `${createdReview} and their rating added` });
-    } catch (error) {
+response.status(201).json({ status: `${createdReview} and their rating added` });
+}
+
+}
+  catch (error) {
       response.status(500).json({ error: "An error occurred" });
     }
-  } else {
-    response.status(405).json({ error: "Method not allowed" });
-  }
-}
+  } 
+
+

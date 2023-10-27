@@ -3,20 +3,19 @@ import Image from "next/image";
 import { useState } from "react";
 import {  useRouter } from "next/router";
 
-  export default function Header() {
+  export default function Header({searchQuery, setSearchQuery}) {
     const [searchButtonPressed, setSearchButtonPressed] = useState(false);
     const [gameButtonPressed, setGameButtonPressed] = useState(false);
     const [rankButtonPressed, setRankButtonPressed] = useState(false);
     const [loginButtonPressed, setLoginButtonPressed] = useState(false);
     const [wishlistButtonPressed, setWishlistButtonPressed] =useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-    
+
     const router = useRouter();
-    
-    const handleSearchButtonClick = () => {
+    const handleSearchButtonClick = (e) => {
+      e.preventDefault(); 
       setSearchButtonPressed(true);
       router.push(`/games?search=${searchQuery}`);
-  };
+    };
 
   const handleGameButtonClick = () => {
     setGameButtonPressed(true);

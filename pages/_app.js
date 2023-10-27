@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import { SWRConfig } from "swr";
 
 export default function App({ Component, pageProps }) {
   const [gameList, setGameList] = useState([]);
   const [page, setPage] = useState(1);
   const [wishlist, setWishlist] = useState([]);
   const [totalItems, setTotalItems] = useState(null); 
+  const [searchQuery, setSearchQuery] = useState("");
+
+
+
   const toggleWishlist = (game) => {
     if (wishlist.includes(game.id)) {
       setWishlist(wishlist.filter((id) => id !== game.id));
@@ -17,12 +22,13 @@ export default function App({ Component, pageProps }) {
 
   const fetchGames = async (page) => {
     try {
-      const pageSize = 100;
+      const pageSize = 40; 
 
       const response = await fetch(
         `https://api.rawg.io/api/games?key=27257cb0d3da4a78b072bd0bc225adb6&page=${page}&page_size=${pageSize}`
       );
 
+      
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }
@@ -55,13 +61,32 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Header gameList={gameList} />
-      <Component {...pageProps} 
+    <SWRConfig
+      value={{
+        fetcher: async (...args) => {
+          const response = await fetch(...args);
+          if (!response.ok) {
+            throw new Error(`Request with ${JSON.stringify(args)} failed.`);
+          }
+          return await response.json();
+        },
+      }}
+    >
+      <Header 
+      gameList={gameList} 
+      setSearchQuery={setSearchQuery} 
+      searchQuery={searchQuery}
+      />
+
+      <Component 
+      {...pageProps} 
       gameList={gameList} 
       loadMoreGames={loadMoreGames} 
       toggleWishlist={toggleWishlist} 
-      wishlist={wishlist} />
+      wishlist={wishlist}
+      searchQuery={searchQuery} />
       <Footer />
+      </SWRConfig>
     </>
   );
 }

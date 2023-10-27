@@ -2,15 +2,23 @@ import Link from "next/link";
 import styles from "./Games.module.css";
 
 
-const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist }) => {
+const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist, searchQuery }) => {
  
+
+
+ 
+  const filteredGames = searchQuery
+  ? gameList.filter((game) =>
+      game.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  : gameList;
 
 console.log(gameList);
   return (
     <main>
       <h2>All the Games in One Place</h2>
       <div className={styles.gameCards}>
-        {gameList.map((game) => (
+        {filteredGames.map((game) => (
           <div key={game.id} className={styles.gameCard}>
             <h3>{game.name}</h3>
             <button onClick={() => toggleWishlist(game)}>
