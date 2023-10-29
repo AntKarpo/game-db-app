@@ -9,8 +9,8 @@ const GamePage = ({ gameList, loadMoreGames, toggleWishlist, wishlist, searchQue
  
   const filteredGames = searchQuery
   ? gameList.filter((game) =>
-      game.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+  game.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
   : gameList;
 
 console.log(gameList);
@@ -21,7 +21,7 @@ console.log(gameList);
         {filteredGames.map((game) => (
           <div key={game.id} className={styles.gameCard}>
             <h3>{game.name}</h3>
-            <button onClick={() => toggleWishlist(game)}>
+            <button className={styles.wishlistButton} onClick={() => toggleWishlist(game)}>
               {wishlist.includes(game.id) ? (
                 <img
                   src="/assets/favorite-full.png"
@@ -51,7 +51,8 @@ console.log(gameList);
               src="/assets/steam-logo.png"
                width={40}  
                height={40}
-                alt={`steam-buy`}/>
+                alt={`steam-buy`}
+             />
                 </Link>
           </div>
         ))}

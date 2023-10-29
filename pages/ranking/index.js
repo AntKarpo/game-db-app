@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import styles from "./ranking.module.css";
 
 const RankingPage = ({ gameList, wishlist, toggleWishlist }) => {
 
@@ -23,7 +24,7 @@ const RankingPage = ({ gameList, wishlist, toggleWishlist }) => {
                 alt={`Image for ${game.name}`}
               />
               </Link>
-               <button onClick={() => toggleWishlist(game)}>
+               <button className={styles.wishlistButton} onClick={() => toggleWishlist(game)}>
               {wishlist.includes(game.id) ? (
                 <img
                   src="/assets/favorite-full.png"

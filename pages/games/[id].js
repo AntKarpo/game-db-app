@@ -16,6 +16,8 @@ const GameDetails = ({ gameList }) => {
     return <div>Loading...</div>;
   }
 
+  console.log("Data from SWR:", data);
+
   return (
     <>
       <div className={styles.detailsCard}>
@@ -28,7 +30,8 @@ const GameDetails = ({ gameList }) => {
         />
         <br />
         <p>Metascore rating: {selectedGame.metacritic}</p>
-        <div>
+        <p>{selectedGame.name}is an {selectedGame.genres.map(genre => genre.name).join("/")} Game which was released on {selectedGame.released}</p>
+       <div>
           {selectedGame.short_screenshots?.map((screenshot, index) => (
             <img
               className={styles.screenshotsContainer}

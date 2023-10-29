@@ -5,10 +5,21 @@
   }
   
   .gameCard {
+    background-color: #7c7272;
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    position: relative;
   }
+
+.wishlistButton {
+  position: absolute; 
+  top: 5px; 
+  right: 5px; 
+  border: none; 
+  background: none;
+}
+
 
   .centeredButton {
     display: flex;
@@ -16,4 +27,5 @@
     align-items: center; 
     margin-top: 20px;
   }
+  
   

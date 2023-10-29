@@ -34,7 +34,7 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
   };
 
   const handleStarClick = (index) => {
-    setRating(index);
+    setRating(index + 1);
   };
 
   return (
@@ -44,8 +44,8 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
           <div key={index}>
             <h4>{review.user}</h4>
             <div>
-              {Array(review.rating).fill(true).map((filled, index) => (
-                <Review key={index} filled={filled} />
+              {[...Array(10)].map((_, index) => (
+                <Review key={index} filled={index < review.rating} />
               ))}
             </div>
             <p>{review.review}</p>
@@ -53,14 +53,22 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
         ))}
         <h1>Add Review</h1>
         <form onSubmit={submitReview}>
-<input type="number" max={10}name="rating" required min={0}/>
+          {[...Array(10)].map((_, index) => (
+            <Review
+              key={index}
+              filled={index < rating}
+              onStarClick={() => handleStarClick(index)}
+            />
+          ))}<br/>
           <input
             style={{ margin: "5px" }}
             type="text"
             placeholder="Name"
             name="user"
             value={newReview.user}
-            onChange={(e) => setNewReview({ ...newReview, user: e.target.value })}
+            onChange={(e) =>
+              setNewReview({ ...newReview, user: e.target.value })
+            }
             required
           />
           <br />
@@ -70,19 +78,14 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
             rows="4"
             cols="50"
             value={newReview.review}
-            onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
+            onChange={(e) =>
+              setNewReview({ ...newReview, review: e.target.value })
+            }
             required
-          />
+          /><br/>
           <button>Submit Review</button>
         </form>
       </div>
     </main>
   );
 }
-       /*  {[...Array(10)].map((star, index) => (
-            <Review
-              key={index}
-              filled={filled}
-              onStarClick={() => handleStarClick(index)}
-            />
-          ))}*/
