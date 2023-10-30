@@ -7,16 +7,33 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
   const [newReview, setNewReview] = useState({
     user: "",
     review: "",
+
   });
 
   const submitReview = async (evt) => {
     evt.preventDefault();
+    const userName = newReview.user;
+    const reviewText = newReview.review;
+    
+    if (userName.trim() === "" || reviewText.length < 100) {
+      alert("Name and review (at least 100 characters) are required.");
+      return;
+    }
+    
+    if (rating === 0) {
+      alert("Please select a rating.");
+      return;
+    }
+
     const data = {
-      user: newReview.user,
-      review: newReview.review,
+      user: userName,
+      review: reviewText,
       rating: rating,
       game: gameId,
     };
+    
+
+    console.log("add review rating",data);
 
     const response = await fetch(`/api/Review`, {
       method: "POST",

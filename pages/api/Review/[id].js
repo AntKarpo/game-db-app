@@ -15,16 +15,17 @@ export default async function handler(request, response) {
       response.status(500).json({ error: "An error occurred" });
     }
   } else if (request.method === "POST") {
+    console.log("body", request.body);
     const { user, review, rating, game } = request.body;
 
     try {
-      const newReview = new Review({
+      const newReview = Review.create({
         user,
         review,
         rating,
         game,
       });
-
+      console.log("newReview", newReview);
       await newReview.save();
 
       response.status(201).json(newReview);
