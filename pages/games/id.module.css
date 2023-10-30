@@ -14,3 +14,11 @@
     color: white;
    font-size: larger;
 }
+
+.wishlistButton {
+    top: 5px; 
+    right: 5px; 
+    border: none; 
+    background: none;
+  }
+  

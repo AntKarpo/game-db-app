@@ -13,13 +13,15 @@ export default function App({ Component, pageProps}) {
 
 
   const toggleWishlist = (game) => {
+    let updatedWishlist;
     if (wishlist.includes(game.id)) {
-      setWishlist(wishlist.filter((id) => id !== game.id));
+      updatedWishlist = wishlist.filter((id) => id !== game.id);
     } else {
-      setWishlist([...wishlist, game.id]);
+      updatedWishlist = [...wishlist, game.id];
     }
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    setWishlist(updatedWishlist);
   };
-
   const fetchGames = async (page) => {
     try {
       const pageSize = 40; 
@@ -55,10 +57,14 @@ export default function App({ Component, pageProps}) {
   }
 
   useEffect(() => {
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+  
   
     fetchGames(page);
   }, [page]);
-
   return (
     <>
     <SWRConfig

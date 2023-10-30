@@ -5,7 +5,7 @@ import Review from "@/components/Review/Review";
 import AddReviewComp from "@/components/add-review";
 import useSWR from "swr";
 
-const GameDetails = ({ gameList }) => {
+const GameDetails = ({ gameList, toggleWishlist, wishlist }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -47,6 +47,23 @@ const GameDetails = ({ gameList }) => {
           width={300}
           height={300}
         />
+        <button className={styles.wishlistButton} onClick={() => toggleWishlist(selectedGame)}>
+            {wishlist.includes(selectedGame.id) ? (
+              <img
+                src="/assets/favorite-full.png"
+                width={20}
+                height={20}
+                alt={`Remove from Wishlist`}
+              />
+            ) : (
+              <img
+                src="/assets/favorite-empty.png"
+                width={20}
+                height={20}
+                alt={`Add to Wishlist`}
+              />
+            )}
+          </button>
          <div>
           {[...Array(fullStars)].map((_, index) => (
             <Review key={index} filled={true} />
