@@ -19,7 +19,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.main}>
-      <h1 className={styles.h1}>The Game Search App</h1>
+      <h1 className={styles.h1}>The Game Search App !</h1>
    <button className={styles.button} onClick={handleClicktoAllGames}><h3>All Games in one Place</h3></button><br/>
    <p className={styles.p}>"With an extensive library covering all genres, our 'All Games in One Place' section is a gamer's paradise.<br/> From action-packed adventures to mind-bending puzzles, there's something for every gaming enthusiast."<br/>
 "Explore a diverse selection of games, from indie gems to blockbuster titles. Your gaming journey begins here!"</p>
