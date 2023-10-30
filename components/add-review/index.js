@@ -50,6 +50,18 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
     }
   };
 
+  const deleteReview = async (reviewId) => {
+    const response = await fetch(`/api/Review/${reviewId}`, {
+      method: "DELETE",
+    });
+  
+    if (response.ok) {
+      mutateReviews();
+    } else {
+      console.error("Error deleting review:", response.status);
+    }
+  };
+
   const handleStarClick = (index) => {
     setRating(index + 1);
   };
@@ -63,8 +75,8 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
             <div>
               {[...Array(10)].map((_, index) => (
                 <Review key={index} filled={index < review.rating} />
-              ))}
-            </div>
+              ))}<button onClick={() => deleteReview(review._id)}>Delete</button> 
+            </div> 
             <p>{review.review}</p>
           </div>
         ))}
