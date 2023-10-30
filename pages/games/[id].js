@@ -15,8 +15,24 @@ const GameDetails = ({ gameList }) => {
     return <div>Loading...</div>;
   }
 
-  console.log("Data from swr===============:", data);
+  function calculateAverageRating(data) {
+    if (data.length === 0) {
+      return { fullStars: 0, halfStar: false };
+    }
+    const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
+    const averageRating = totalRating / data.length;
+    const fullStars = Math.floor(averageRating);
+    const decimalPart = averageRating - fullStars;
+    let halfStar = false;
+  
+    if (decimalPart >= 0.25 && decimalPart <= 0.75) {
+      halfStar = true;
+    }
+    return { fullStars, halfStar };
+  }
 
+  const { fullStars, halfStar } = calculateAverageRating(data);
+  console.log(calculateAverageRating(data));
 
   return (
     <>
@@ -28,10 +44,23 @@ const GameDetails = ({ gameList }) => {
           width={300}
           height={300}
         />
+        <div>
+          {[...Array(fullStars)].map((_, index) => (
+            <Review key={index} filled={true} />
+          ))}
+          {halfStar && <Review filled={true} halfStar={true} />}
+          {[...Array(10 - fullStars - (halfStar ? 1 : 0))].map((_, index) => (
+            <Review key={index} filled={false} />
+          ))}
+        </div>
         <br />
         <p>Metascore rating: {selectedGame.metacritic}</p>
-        <p>{selectedGame.name}is an {selectedGame.genres.map(genre => genre.name).join("/")} Game which was released on {selectedGame.released}</p>
-       <div>
+        <p>
+          {selectedGame.name} is an{" "}
+          {selectedGame.genres.map((genre) => genre.name).join("/")} Game which
+          was released on {selectedGame.released}
+        </p>
+        <div>
           {selectedGame.short_screenshots?.map((screenshot, index) => (
             <img
               className={styles.screenshotsContainer}
