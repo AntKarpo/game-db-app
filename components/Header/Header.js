@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import {  useRouter } from "next/router";
 
+
   export default function Header({searchQuery, setSearchQuery}) {
     const [searchButtonPressed, setSearchButtonPressed] = useState(false);
     const [gameButtonPressed, setGameButtonPressed] = useState(false);
@@ -99,7 +100,7 @@ import {  useRouter } from "next/router";
           alt="wishlist Icon"
         />
       </button>
-      <button
+           <button
         className={`${styles.searchBarButton} ${loginButtonPressed ? styles.pressed : ""}`}
         id={styles.loginIcon}
         onClick={handleLoginButtonClick}

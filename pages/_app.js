@@ -3,13 +3,13 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { SWRConfig } from "swr";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps}) {
   const [gameList, setGameList] = useState([]);
   const [page, setPage] = useState(1);
   const [wishlist, setWishlist] = useState([]);
   const [totalItems, setTotalItems] = useState(null); 
   const [searchQuery, setSearchQuery] = useState("");
-
+  
 
 
   const toggleWishlist = (game) => {
@@ -77,7 +77,6 @@ export default function App({ Component, pageProps }) {
       setSearchQuery={setSearchQuery} 
       searchQuery={searchQuery}
       />
-
       <Component 
       {...pageProps} 
       gameList={gameList} 
