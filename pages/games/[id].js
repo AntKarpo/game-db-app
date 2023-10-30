@@ -8,9 +8,7 @@ import useSWR from "swr";
 const GameDetails = ({ gameList }) => {
   const router = useRouter();
   const { id } = router.query;
-  console.log("game IDDDDDDDDDDD ===============", id);
   const selectedGame = gameList.find((game) => game.id == id);
-console.log("selectedGame !!!!!!!!!!!",selectedGame);
   const { data, error, mutate } = useSWR(`/api/Review/${id}`);
 
   if (!selectedGame) {
