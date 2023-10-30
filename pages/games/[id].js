@@ -8,7 +8,9 @@ import useSWR from "swr";
 const GameDetails = ({ gameList }) => {
   const router = useRouter();
   const { id } = router.query;
+
   const selectedGame = gameList.find((game) => game.id == id);
+
   const { data, error, mutate } = useSWR(`/api/Review/${id}`);
 
   if (!selectedGame) {
@@ -16,9 +18,10 @@ const GameDetails = ({ gameList }) => {
   }
 
   function calculateAverageRating(data) {
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
       return { fullStars: 0, halfStar: false };
     }
+
     const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
     const averageRating = totalRating / data.length;
     const fullStars = Math.floor(averageRating);
@@ -28,11 +31,11 @@ const GameDetails = ({ gameList }) => {
     if (decimalPart >= 0.25 && decimalPart <= 0.75) {
       halfStar = true;
     }
+  
     return { fullStars, halfStar };
   }
 
   const { fullStars, halfStar } = calculateAverageRating(data);
-  console.log(calculateAverageRating(data));
 
   return (
     <>
@@ -44,7 +47,7 @@ const GameDetails = ({ gameList }) => {
           width={300}
           height={300}
         />
-        <div>
+         <div>
           {[...Array(fullStars)].map((_, index) => (
             <Review key={index} filled={true} />
           ))}

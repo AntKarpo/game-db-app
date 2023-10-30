@@ -7,7 +7,6 @@ export default function AddReviewComp({ reviews, gameId, mutateReviews }) {
   const [newReview, setNewReview] = useState({
     user: "",
     review: "",
-
   });
 
   const submitReview = async (evt) => {
